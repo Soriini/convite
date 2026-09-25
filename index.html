@@ -9,7 +9,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
 }
 body {
   background-color: #0d0d0d;
@@ -18,7 +18,7 @@ body {
   align-items: center;
   min-height: 100vh;
 }
-/* Moldura do Celular */
+/* Moldura do Telemóvel */
 .phone {
   width: 360px;
   height: 700px;
@@ -45,147 +45,248 @@ body {
   border-radius: 12px;
   z-index: 10;
 }
+
+/* Corações no fundo */
+.hearts-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.heart-icon {
+  position: absolute;
+  font-size: 20px;
+  opacity: 0.6;
+  filter: brightness(0.3);
+  animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
 .screen {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
   color: white;
   z-index: 2;
+  padding: 40px 10px 20px 10px;
 }
 .hidden {
   display: none !important;
 }
-.emoji {
-  font-size: 65px;
-  margin-bottom: 15px;
-}
-h2 {
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  font-weight: 800;
+
+/* Balão Superior */
+.top-tag {
+  background: rgba(229, 45, 39, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 25px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 900;
   letter-spacing: 1px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  color: #fff;
 }
+
+/* Emoji da Imagem */
+.custom-emoji-img {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin: 10px 0;
+}
+
+/* Card Escuro de Pergunta */
+.question-card {
+  background: #2a080c;
+  border-radius: 20px;
+  padding: 20px 15px;
+  width: 100%;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  position: relative;
+}
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #2a080c;
+}
+.question-card h2 {
+  font-size: 1.1rem;
+  font-weight: 900;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+}
+
 .btn-container {
   display: flex;
-  gap: 15px;
-  margin-top: 15px;
+  gap: 10px;
   position: relative;
   width: 100%;
   justify-content: center;
 }
 button {
-  background-color: #ffffff;
-  color: #b31217;
-  border: none;
-  padding: 12px 24px;
-  font-size: 1rem;
+  background: #e52d27;
+  color: #ffffff;
+  border: 1.5px solid rgba(255,255,255,0.4);
+  padding: 10px 20px;
+  font-size: 0.95rem;
   font-weight: bold;
-  border-radius: 25px;
+  border-radius: 20px;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
   width: 100%;
-  max-width: 220px;
 }
 button:hover {
   transform: scale(1.05);
 }
-#btn-nao {
-  position: relative;
-}
-/* Cards de Comida */
-.grid-comida {
+
+/* Grelhas das Opções */
+.grid-comida, .grid-vibe {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
+.grid-comida { grid-template-columns: 1fr 1fr; }
+.grid-vibe { grid-template-columns: 1fr 1fr 1fr; }
+
 .card-option {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   color: white;
-  padding: 12px 8px;
+  padding: 10px 4px;
   border-radius: 15px;
-  font-size: 0.95rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 }
+.card-option span { font-size: 1.4rem; }
 .card-option.selected {
   background: #ffffff;
   color: #b31217;
   border-color: #ffffff;
 }
-/* Entradas de Formutário */
+
+/* Campos e Resumo */
 .input-group {
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   text-align: left;
 }
 .input-group label {
   display: block;
-  font-size: 0.85rem;
-  margin-bottom: 6px;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
   font-weight: bold;
 }
 input[type="date"], input[type="time"] {
   width: 100%;
-  padding: 12px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
-  font-size: 1rem;
+  font-size: 0.9rem;
   outline: none;
-  background-color: #fff;
-  color: #333;
 }
 .resumo-box {
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.3);
   padding: 15px;
   border-radius: 15px;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-align: left;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.85rem;
+  line-height: 1.5;
 }
 </style>
 </head>
 <body>
 
 <div class="phone">
-  <!-- TELA 1: Pergunta do Encontro -->
+  <!-- Corações no Fundo -->
+  <div class="hearts-bg">
+    <div class="heart-icon" style="top: 8%; left: 15%;">🖤</div>
+    <div class="heart-icon" style="top: 15%; left: 75%;">🖤</div>
+    <div class="heart-icon" style="top: 25%; left: 22%;">🖤</div>
+    <div class="heart-icon" style="top: 27%; left: 50%;">🖤</div>
+    <div class="heart-icon" style="top: 28%; left: 70%;">🖤</div>
+    <div class="heart-icon" style="top: 42%; left: 82%;">🖤</div>
+    <div class="heart-icon" style="top: 80%; left: 30%;">🖤</div>
+    <div class="heart-icon" style="top: 79%; left: 45%;">🖤</div>
+    <div class="heart-icon" style="top: 81%; left: 70%;">🖤</div>
+    <div class="heart-icon" style="top: 90%; left: 28%;">🖤</div>
+    <div class="heart-icon" style="top: 92%; left: 81%;">🖤</div>
+  </div>
+
+  <!-- TELA 1: Pergunta Estilo Imagem -->
   <div id="step-1" class="screen">
-    <div class="emoji">💌</div>
-    <h2>Quer sair comigo?</h2>
-    <div class="btn-container">
-      <button id="btn-sim" onclick="goStep(2)">SIM!</button>
-      <button id="btn-nao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
+    <div class="top-tag">TEM CERTEZA?</div>
+    
+    <!-- Emoji Pedindo Por Favor (imagem igual à foto) -->
+    <img class="custom-emoji-img" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f97a/512.png" alt="Emoji a pedir por favor">
+    
+    <div class="question-card">
+      <h2>VOCÊ ACEITARIA IR À UM DATE COMIGO?</h2>
+      <div class="btn-container">
+        <button id="btn-sim" onclick="goStep(2)">SIM</button>
+        <button id="btn-nao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
+      </div>
     </div>
   </div>
 
   <!-- TELA 2: Escolha da Comida -->
-  <div id="step-2" class="screen hidden">
-    <div class="emoji">🍕</div>
-    <h2>O que vamos comer?</h2>
+  <div id="step-2" class="screen hidden" style="justify-content: center;">
+    <div style="font-size: 50px; margin-bottom: 10px;">🍕</div>
+    <h2 style="margin-bottom: 15px;">O QUE VAMOS COMER?</h2>
     <div class="grid-comida">
-      <div class="card-option" onclick="selectFood(this, 'Japonês')">🍣 Japonês</div>
-      <div class="card-option" onclick="selectFood(this, 'Hambúrguer')">🍔 Hambúrguer</div>
-      <div class="card-option" onclick="selectFood(this, 'Pizza')">🍕 Pizza</div>
-      <div class="card-option" onclick="selectFood(this, 'Outro')">🍝 Italiano</div>
+      <div class="card-option" onclick="selectFood(this, 'Japonês')"><span>🍣</span> Japonês</div>
+      <div class="card-option" onclick="selectFood(this, 'Hambúrguer')"><span>🍔</span> Hambúrguer</div>
+      <div class="card-option" onclick="selectFood(this, 'Pizza')"><span>🍕</span> Pizza</div>
+      <div class="card-option" onclick="selectFood(this, 'Italiano')"><span>🍝</span> Italiano</div>
     </div>
-    <button onclick="checkStep2()">Continuar</button>
+    <button onclick="checkStep2()">CONTINUAR</button>
   </div>
 
-  <!-- TELA 3: Data e Hora -->
-  <div id="step-3" class="screen hidden">
-    <div class="emoji">📅</div>
-    <h2>Qual dia e horário?</h2>
+  <!-- TELA 3: Qual é a Vibe? -->
+  <div id="step-3" class="screen hidden" style="justify-content: center;">
+    <h2 style="margin-bottom: 15px;">QUAL É A VIBE? ✨</h2>
+    <div class="grid-vibe">
+      <div class="card-option" onclick="selectVibe(this, 'Golfe')"><span>⛳</span> Golfe</div>
+      <div class="card-option" onclick="selectVibe(this, 'Caminhada')"><span>🚶</span> Caminhada</div>
+      <div class="card-option" onclick="selectVibe(this, 'Cinema')"><span>🎬</span> Cinema</div>
+      <div class="card-option" onclick="selectVibe(this, 'Dança')"><span>💃</span> Dança</div>
+      <div class="card-option" onclick="selectVibe(this, 'Parque')"><span>🎢</span> Parque</div>
+      <div class="card-option" onclick="selectVibe(this, 'Praia')"><span>🏖️</span> Praia</div>
+    </div>
+    <button onclick="checkStep3()">AVANÇAR</button>
+  </div>
+
+  <!-- TELA 4: Data e Hora -->
+  <div id="step-4" class="screen hidden" style="justify-content: center;">
+    <div style="font-size: 50px; margin-bottom: 10px;">📅</div>
+    <h2 style="margin-bottom: 15px;">QUAL DIA E HORÁRIO?</h2>
     <div class="input-group">
       <label for="date-input">Data:</label>
       <input type="date" id="date-input">
@@ -194,32 +295,33 @@ input[type="date"], input[type="time"] {
       <label for="time-input">Horário:</label>
       <input type="time" id="time-input">
     </div>
-    <button onclick="checkStep3()">Avançar</button>
+    <button onclick="checkStep4()" style="margin-top: 10px;">AVANÇAR</button>
   </div>
 
-  <!-- TELA 4: Resumo e WhatsApp -->
-  <div id="step-4" class="screen hidden">
-    <div class="emoji">🎉</div>
-    <h2>Tudo Marcado!</h2>
+  <!-- TELA 5: Resumo e WhatsApp -->
+  <div id="step-5" class="screen hidden" style="justify-content: center;">
+    <div style="font-size: 50px; margin-bottom: 10px;">🎉</div>
+    <h2 style="margin-bottom: 15px;">TUDO MARCADO!</h2>
     <div class="resumo-box">
-      <p>📌 <strong>Prato:</strong> <span id="res-food"></span></p>
+      <p>🍕 <strong>Prato:</strong> <span id="res-food"></span></p>
+      <p>✨ <strong>Vibe:</strong> <span id="res-vibe"></span></p>
       <p>📅 <strong>Data:</strong> <span id="res-date"></span></p>
       <p>⏰ <strong>Hora:</strong> <span id="res-time"></span></p>
     </div>
-    <button onclick="sendToWhatsApp()">Confirmar no WhatsApp</button>
+    <button onclick="sendToWhatsApp()">CONFIRMAR NO WHATSAPP</button>
   </div>
 </div>
 
 <script>
-// Coloque aqui o seu número com DDD (ex: 5521999999999)
-const PHONE_NUMBER = "5500000000000"; 
+const PHONE_NUMBER = "5521965564467"; 
 
 let foodChoice = "";
+let vibeChoice = "";
 
 function fugir() {
   const btnNao = document.getElementById('btn-nao');
-  const x = Math.random() * 160 - 80;
-  const y = Math.random() * 160 - 80;
+  const x = Math.random() * 120 - 60;
+  const y = Math.random() * 120 - 60;
   btnNao.style.transform = `translate(${x}px, ${y}px)`;
 }
 
@@ -229,9 +331,15 @@ function goStep(stepNumber) {
 }
 
 function selectFood(element, name) {
-  document.querySelectorAll('.card-option').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll('.grid-comida .card-option').forEach(el => el.classList.remove('selected'));
   element.classList.add('selected');
   foodChoice = name;
+}
+
+function selectVibe(element, name) {
+  document.querySelectorAll('.grid-vibe .card-option').forEach(el => el.classList.remove('selected'));
+  element.classList.add('selected');
+  vibeChoice = name;
 }
 
 function checkStep2() {
@@ -243,6 +351,14 @@ function checkStep2() {
 }
 
 function checkStep3() {
+  if (!vibeChoice) {
+    alert("Escolha uma opção de atividade!");
+    return;
+  }
+  goStep(4);
+}
+
+function checkStep4() {
   const dateVal = document.getElementById('date-input').value;
   const timeVal = document.getElementById('time-input').value;
 
@@ -254,21 +370,22 @@ function checkStep3() {
   const formattedDate = dateVal.split('-').reverse().join('/');
 
   document.getElementById('res-food').innerText = foodChoice;
+  document.getElementById('res-vibe').innerText = vibeChoice;
   document.getElementById('res-date').innerText = formattedDate;
   document.getElementById('res-time').innerText = timeVal;
 
-  goStep(4);
+  goStep(5);
 }
 
 function sendToWhatsApp() {
   const date = document.getElementById('res-date').innerText;
   const time = document.getElementById('res-time').innerText;
 
-  const msg = `Oii! Aceito o convite! ❤️\n\n*Nosso Encontro:*\n• *Comida:* ${foodChoice}\n• *Data:* ${date}\n• *Horário:* ${time}`;
+  const msg = `Oii! Aceito o convite! ❤️\n\n*Nosso Encontro:*\n• *Comida:* ${foodChoice}\n• *Vibe:* ${vibeChoice}\n• *Data:* ${date}\n• *Horário:* ${time}`;
   
   window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
 }
 </script>
 
 </body>
-</html>
+</html> 
