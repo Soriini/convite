@@ -240,24 +240,36 @@ input[type="date"], input[type="time"] {
     <div class="heart-icon" style="top: 92%; left: 81%;">🖤</div>
   </div>
 
-  <!-- TELA 1: Pergunta Estilo Imagem -->
-  <div id="step-1" class="screen">
-    <div class="top-tag">TEM CERTEZA?</div>
-    
-    <!-- Emoji Pedindo Por Favor (imagem igual à foto) -->
-    <img class="custom-emoji-img" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f97a/512.png" alt="Emoji a pedir por favor">
+  <!-- TELA 1: Pergunta Inicial -->
+  <div id="step-1" class="screen" style="justify-content: center; gap: 30px;">
+    <div style="font-size: 70px;">💌</div>
     
     <div class="question-card">
       <h2>VOCÊ ACEITARIA IR À UM DATE COMIGO?</h2>
       <div class="btn-container">
-        <button id="btn-sim" onclick="goStep(2)">SIM</button>
-        <button id="btn-nao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
+        <button id="btn-sim-1" onclick="goStep(2)">SIM</button>
+        <button id="btn-nao-1" onmouseover="fugir(this)" onclick="fugir(this)">NÃO</button>
       </div>
     </div>
   </div>
 
-  <!-- TELA 2: Escolha da Comida -->
-  <div id="step-2" class="screen hidden" style="justify-content: center;">
+  <!-- TELA 2: Confirmação "TEM CERTEZA?" (Aparece logo após clicar em SIM) -->
+  <div id="step-2" class="screen hidden">
+    <div class="top-tag">TEM CERTEZA?</div>
+    
+    <img class="custom-emoji-img" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f97a/512.png" alt="Emoji a pedir por favor">
+    
+    <div class="question-card">
+      <h2>CERTEZA ABSOLUTA? 🥺</h2>
+      <div class="btn-container">
+        <button id="btn-sim-2" onclick="goStep(3)">SIM, TENHO!</button>
+        <button id="btn-nao-2" onmouseover="fugir(this)" onclick="fugir(this)">NÃO</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 3: Escolha da Comida -->
+  <div id="step-3" class="screen hidden" style="justify-content: center;">
     <div style="font-size: 50px; margin-bottom: 10px;">🍕</div>
     <h2 style="margin-bottom: 15px;">O QUE VAMOS COMER?</h2>
     <div class="grid-comida">
@@ -266,11 +278,11 @@ input[type="date"], input[type="time"] {
       <div class="card-option" onclick="selectFood(this, 'Pizza')"><span>🍕</span> Pizza</div>
       <div class="card-option" onclick="selectFood(this, 'Italiano')"><span>🍝</span> Italiano</div>
     </div>
-    <button onclick="checkStep2()">CONTINUAR</button>
+    <button onclick="checkStep3()">CONTINUAR</button>
   </div>
 
-  <!-- TELA 3: Qual é a Vibe? -->
-  <div id="step-3" class="screen hidden" style="justify-content: center;">
+  <!-- TELA 4: Qual é a Vibe? -->
+  <div id="step-4" class="screen hidden" style="justify-content: center;">
     <h2 style="margin-bottom: 15px;">QUAL É A VIBE? ✨</h2>
     <div class="grid-vibe">
       <div class="card-option" onclick="selectVibe(this, 'Golfe')"><span>⛳</span> Golfe</div>
@@ -280,11 +292,11 @@ input[type="date"], input[type="time"] {
       <div class="card-option" onclick="selectVibe(this, 'Parque')"><span>🎢</span> Parque</div>
       <div class="card-option" onclick="selectVibe(this, 'Praia')"><span>🏖️</span> Praia</div>
     </div>
-    <button onclick="checkStep3()">AVANÇAR</button>
+    <button onclick="checkStep4()">AVANÇAR</button>
   </div>
 
-  <!-- TELA 4: Data e Hora -->
-  <div id="step-4" class="screen hidden" style="justify-content: center;">
+  <!-- TELA 5: Data e Hora -->
+  <div id="step-5" class="screen hidden" style="justify-content: center;">
     <div style="font-size: 50px; margin-bottom: 10px;">📅</div>
     <h2 style="margin-bottom: 15px;">QUAL DIA E HORÁRIO?</h2>
     <div class="input-group">
@@ -295,11 +307,11 @@ input[type="date"], input[type="time"] {
       <label for="time-input">Horário:</label>
       <input type="time" id="time-input">
     </div>
-    <button onclick="checkStep4()" style="margin-top: 10px;">AVANÇAR</button>
+    <button onclick="checkStep5()" style="margin-top: 10px;">AVANÇAR</button>
   </div>
 
-  <!-- TELA 5: Resumo e WhatsApp -->
-  <div id="step-5" class="screen hidden" style="justify-content: center;">
+  <!-- TELA 6: Resumo e WhatsApp -->
+  <div id="step-6" class="screen hidden" style="justify-content: center;">
     <div style="font-size: 50px; margin-bottom: 10px;">🎉</div>
     <h2 style="margin-bottom: 15px;">TUDO MARCADO!</h2>
     <div class="resumo-box">
@@ -318,11 +330,10 @@ const PHONE_NUMBER = "5521965564467";
 let foodChoice = "";
 let vibeChoice = "";
 
-function fugir() {
-  const btnNao = document.getElementById('btn-nao');
+function fugir(btn) {
   const x = Math.random() * 120 - 60;
   const y = Math.random() * 120 - 60;
-  btnNao.style.transform = `translate(${x}px, ${y}px)`;
+  btn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
 function goStep(stepNumber) {
@@ -342,23 +353,23 @@ function selectVibe(element, name) {
   vibeChoice = name;
 }
 
-function checkStep2() {
+function checkStep3() {
   if (!foodChoice) {
     alert("Escolha uma opção para comer!");
-    return;
-  }
-  goStep(3);
-}
-
-function checkStep3() {
-  if (!vibeChoice) {
-    alert("Escolha uma opção de atividade!");
     return;
   }
   goStep(4);
 }
 
 function checkStep4() {
+  if (!vibeChoice) {
+    alert("Escolha uma opção de atividade!");
+    return;
+  }
+  goStep(5);
+}
+
+function checkStep5() {
   const dateVal = document.getElementById('date-input').value;
   const timeVal = document.getElementById('time-input').value;
 
@@ -374,7 +385,7 @@ function checkStep4() {
   document.getElementById('res-date').innerText = formattedDate;
   document.getElementById('res-time').innerText = timeVal;
 
-  goStep(5);
+  goStep(6);
 }
 
 function sendToWhatsApp() {
@@ -388,4 +399,4 @@ function sendToWhatsApp() {
 </script>
 
 </body>
-</html> 
+</html>
