@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite Especial 💌</title>
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+  background-color: #0d0d0d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+/* Moldura do Celular */
+.phone {
+  width: 360px;
+  height: 700px;
+  background: linear-gradient(180deg, #e52d27 0%, #b31217 100%);
+  border-radius: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  border: 8px solid #222;
+}
+/* Notch Superior */
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  width: 120px;
+  height: 24px;
+  background-color: #222;
+  border-radius: 12px;
+  z-index: 10;
+}
+.screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+.hidden {
+  display: none !important;
+}
+.emoji {
+  font-size: 65px;
+  margin-bottom: 15px;
+}
+h2 {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.btn-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+  position: relative;
+  width: 100%;
+  justify-content: center;
+}
+button {
+  background-color: #ffffff;
+  color: #b31217;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s, background-color 0.2s;
+  width: 100%;
+  max-width: 220px;
+}
+button:hover {
+  transform: scale(1.05);
+}
+#btn-nao {
+  position: relative;
+}
+/* Cards de Comida */
+.grid-comida {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.card-option {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  color: white;
+  padding: 12px 8px;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.card-option.selected {
+  background: #ffffff;
+  color: #b31217;
+  border-color: #ffffff;
+}
+/* Entradas de Formutário */
+.input-group {
+  width: 100%;
+  margin-bottom: 15px;
+  text-align: left;
+}
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+input[type="date"], input[type="time"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  background-color: #fff;
+  color: #333;
+}
+.resumo-box {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 15px;
+  border-radius: 15px;
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+
+<div class="phone">
+  <!-- TELA 1: Pergunta do Encontro -->
+  <div id="step-1" class="screen">
+    <div class="emoji">💌</div>
+    <h2>Quer sair comigo?</h2>
+    <div class="btn-container">
+      <button id="btn-sim" onclick="goStep(2)">SIM!</button>
+      <button id="btn-nao" onmouseover="fugir()" onclick="fugir()">NÃO</button>
+    </div>
+  </div>
+
+  <!-- TELA 2: Escolha da Comida -->
+  <div id="step-2" class="screen hidden">
+    <div class="emoji">🍕</div>
+    <h2>O que vamos comer?</h2>
+    <div class="grid-comida">
+      <div class="card-option" onclick="selectFood(this, 'Japonês')">🍣 Japonês</div>
+      <div class="card-option" onclick="selectFood(this, 'Hambúrguer')">🍔 Hambúrguer</div>
+      <div class="card-option" onclick="selectFood(this, 'Pizza')">🍕 Pizza</div>
+      <div class="card-option" onclick="selectFood(this, 'Outro')">🍝 Italiano</div>
+    </div>
+    <button onclick="checkStep2()">Continuar</button>
+  </div>
+
+  <!-- TELA 3: Data e Hora -->
+  <div id="step-3" class="screen hidden">
+    <div class="emoji">📅</div>
+    <h2>Qual dia e horário?</h2>
+    <div class="input-group">
+      <label for="date-input">Data:</label>
+      <input type="date" id="date-input">
+    </div>
+    <div class="input-group">
+      <label for="time-input">Horário:</label>
+      <input type="time" id="time-input">
+    </div>
+    <button onclick="checkStep3()">Avançar</button>
+  </div>
+
+  <!-- TELA 4: Resumo e WhatsApp -->
+  <div id="step-4" class="screen hidden">
+    <div class="emoji">🎉</div>
+    <h2>Tudo Marcado!</h2>
+    <div class="resumo-box">
+      <p>📌 <strong>Prato:</strong> <span id="res-food"></span></p>
+      <p>📅 <strong>Data:</strong> <span id="res-date"></span></p>
+      <p>⏰ <strong>Hora:</strong> <span id="res-time"></span></p>
+    </div>
+    <button onclick="sendToWhatsApp()">Confirmar no WhatsApp</button>
+  </div>
+</div>
+
+<script>
+// Coloque aqui o seu número com DDD (ex: 5521999999999)
+const PHONE_NUMBER = "5500000000000"; 
+
+let foodChoice = "";
+
+function fugir() {
+  const btnNao = document.getElementById('btn-nao');
+  const x = Math.random() * 160 - 80;
+  const y = Math.random() * 160 - 80;
+  btnNao.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function goStep(stepNumber) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+  document.getElementById(`step-${stepNumber}`).classList.remove('hidden');
+}
+
+function selectFood(element, name) {
+  document.querySelectorAll('.card-option').forEach(el => el.classList.remove('selected'));
+  element.classList.add('selected');
+  foodChoice = name;
+}
+
+function checkStep2() {
+  if (!foodChoice) {
+    alert("Escolha uma opção para comer!");
+    return;
+  }
+  goStep(3);
+}
+
+function checkStep3() {
+  const dateVal = document.getElementById('date-input').value;
+  const timeVal = document.getElementById('time-input').value;
+
+  if (!dateVal || !timeVal) {
+    alert("Por favor, selecione a data e o horário!");
+    return;
+  }
+
+  const formattedDate = dateVal.split('-').reverse().join('/');
+
+  document.getElementById('res-food').innerText = foodChoice;
+  document.getElementById('res-date').innerText = formattedDate;
+  document.getElementById('res-time').innerText = timeVal;
+
+  goStep(4);
+}
+
+function sendToWhatsApp() {
+  const date = document.getElementById('res-date').innerText;
+  const time = document.getElementById('res-time').innerText;
+
+  const msg = `Oii! Aceito o convite! ❤️\n\n*Nosso Encontro:*\n• *Comida:* ${foodChoice}\n• *Data:* ${date}\n• *Horário:* ${time}`;
+  
+  window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+</script>
+
+</body>
+</html>
