@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>O Corvo Chegou 🐦‍⬛</title>
+<!-- Importando fontes com estilo medieval e caligráfico -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #111;
+    background-image: radial-gradient(circle at center, #2a2a2a 0%, #000 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  /* Moldura Base (Mobile Friendly) */
+  .container {
+    width: 380px;
+    height: 700px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  /* TELA 1: O Corvo */
+  #tela-corvo {
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .raven-icon {
+    font-size: 80px;
+    filter: drop-shadow(0 0 10px rgba(255,255,255,0.2));
+    animation: hoverPulse 3s infinite alternate;
+  }
+
+  .mensagem-corvo {
+    background: rgba(20, 20, 20, 0.8);
+    border: 2px solid #5a4f35;
+    padding: 25px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    position: relative;
+  }
+
+  .mensagem-corvo p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #d4c4a8;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  /* Botão Estilo Game of Thrones */
+  .btn-got {
+    background: linear-gradient(180deg, #3a0d0d 0%, #1a0505 100%);
+    color: #d4c4a8;
+    border: 2px solid #8b7355;
+    padding: 12px 25px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    transition: all 0.3s ease;
+    margin-top: 20px;
+    text-transform: uppercase;
+  }
+
+  .btn-got:hover {
+    background: linear-gradient(180deg, #5c1414 0%, #2b0808 100%);
+    border-color: #d4c4a8;
+    transform: scale(1.05);
+  }
+
+  /* TELA 2: O Pergaminho */
+  #tela-pergaminho {
+    width: 100%;
+    animation: unrollScroll 1.2s forwards cubic-bezier(0.1, 0.8, 0.2, 1);
+    transform-origin: top;
+  }
+
+  .pergaminho-bg {
+    background-color: #e8dcc4; /* Cor de papel envelhecido */
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+    border: 3px solid #5a4f35;
+    border-radius: 5px;
+    padding: 30px 25px;
+    color: #2c1e16;
+    box-shadow: inset 0 0 40px rgba(100, 70, 30, 0.5), 0 10px 30px rgba(0,0,0,0.8);
+    position: relative;
+    text-align: center;
+  }
+
+  /* Efeito de rolo do pergaminho em cima e em baixo */
+  .pergaminho-bg::before, .pergaminho-bg::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    right: -10px;
+    height: 15px;
+    background: linear-gradient(to bottom, #8b7355, #4a3a25, #2c1e16);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  }
+  .pergaminho-bg::before { top: -10px; }
+  .pergaminho-bg::after { bottom: -10px; }
+
+  .pergaminho-bg h1 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #8b7355;
+    padding-bottom: 10px;
+    color: #4a0d0d;
+  }
+
+  .pergaminho-bg p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    font-weight: 700;
+  }
+
+  .destaque {
+    color: #8b0000;
+  }
+
+  /* Área de Assinatura */
+  .assinatura-box {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .assinatura-box p {
+    font-size: 0.8rem;
+    margin: 0;
+    color: #5a4f35;
+  }
+
+  input[type="text"] {
+    background: transparent;
+    border: none;
+    border-bottom: 2px dashed #8b7355;
+    width: 80%;
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Great Vibes', cursive;
+    color: #1a1a1a;
+    outline: none;
+    padding: 5px;
+  }
+
+  input[type="text"]::placeholder {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: rgba(90, 79, 53, 0.5);
+  }
+
+  /* TELA 3: Confirmação */
+  #tela-sucesso {
+    text-align: center;
+    animation: fadeIn 1s;
+  }
+
+  /* Animações */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes unrollScroll {
+    0% { transform: scaleY(0); opacity: 0; }
+    100% { transform: scaleY(1); opacity: 1; }
+  }
+
+  @keyframes hoverPulse {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- TELA 1: MENSAGEM DO CORVO -->
+  <div id="tela-corvo">
+    <div class="raven-icon">🐦‍⬛</div>
+    <div class="mensagem-corvo">
+      <p>"A Casa Pedrusco lhe enviou este corvo contendo informações valiosíssimas, pois o inverno se aproxima princesa..."</p>
+    </div>
+    <button class="btn-got" onclick="abrirPergaminho()">📜 Romper o Selo</button>
+  </div>
+
+  <!-- TELA 2: O PERGAMINHO ABERTO -->
+  <div id="tela-pergaminho" class="hidden">
+    <div class="pergaminho-bg">
+      <h1>⚔️ CONVOCAÇÃO REAL ⚔️</h1>
+      
+      <p>Pelo presente decreto, Vossa Graça é intimada a comparecer ao <span class="destaque">Reino Pedro</span> para celebrarmos a gloriosa marca de <strong>7 meses de nossa aliança</strong>.</p>
+      
+      <p>Haverá um grandioso banquete regado a <span class="destaque">Kit Festa</span>, seguido da exibição das crônicas do nosso reino (Assistir Game of Thrones). 🐺🐉</p>
+      
+      <p><strong>Quando:</strong> Dia 02/09/2026<br>
+      <strong>Onde:</strong> Reino Pedro</p>
+      
+      <div class="assinatura-box">
+        <p>Assine abaixo para selar vosso juramento e confirmar a sua presença milady:</p>
+        <input type="text" id="nome-assinatura" placeholder="Sua assinatura aqui..." autocomplete="off">
+        <button class="btn-got" style="margin-top: 15px; background: #3a0d0d;" onclick="assinarEConfirmar()">Selar Juramento 🩸</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TELA 3: ENVIO WHATSAPP -->
+  <div id="tela-sucesso" class="hidden">
+    <div style="font-size: 70px; margin-bottom: 20px;">👑</div>
+    <h2 style="color: #d4c4a8; margin-bottom: 15px; text-transform: uppercase;">Despache o corvo</h2>
+    <p style="color: #aaa; margin-bottom: 25px;">Sua assinatura viajará de volta, milady.</p>
+    <button class="btn-got" onclick="enviarCorvoWhatsapp()">Enviar corvo</button>
+  </div>
+
+</div>
+
+<script>
+  const PHONE_NUMBER = "5521964766596"; 
+  let assinaturaSalva = "";
+
+  function abrirPergaminho() {
+    document.getElementById('tela-corvo').classList.add('hidden');
+    document.getElementById('tela-pergaminho').classList.remove('hidden');
+  }
+
+  function assinarEConfirmar() {
+    const nome = document.getElementById('nome-assinatura').value.trim();
+    
+    if (nome === "") {
+      alert("Milorde / Milady, é necessário assinar o pergaminho antes de selar o juramento!");
+      return;
+    }
+
+    assinaturaSalva = nome;
+
+    document.getElementById('tela-pergaminho').classList.add('hidden');
+    document.getElementById('tela-sucesso').classList.remove('hidden');
+  }
+
+  function enviarCorvoWhatsapp() {
+    const msg = `O inverno chegou, mas meu coração está aquecido! 🐺🔥\n\n*Assinei o pergaminho* e confirmo minha presença no Reino Pedro dia 02/09/2026 para celebrar nossos 7 meses com Kit Festa e muito Game of Thrones!\n\nSelado por: *${assinaturaSalva}* 🩸`;
+    
+    window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+</script>
+
+</body>
+</html>
