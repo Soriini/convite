@@ -99,7 +99,7 @@ body {
   color: #fff;
 }
 
-/* Emoji da Imagem */
+/* Imagens dos Emojis */
 .custom-emoji-img {
   width: 180px;
   height: 180px;
@@ -240,9 +240,11 @@ input[type="date"], input[type="time"] {
     <div class="heart-icon" style="top: 92%; left: 81%;">🖤</div>
   </div>
 
-  <!-- TELA 1: Pergunta Inicial -->
-  <div id="step-1" class="screen" style="justify-content: center; gap: 30px;">
-    <div style="font-size: 70px;">💌</div>
+  <!-- TELA 1: Pergunta Inicial com Emoji Apaixonado -->
+  <div id="step-1" class="screen">
+    <div class="top-tag">CONVITE</div>
+
+    <img class="custom-emoji-img" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f60d/512.png" alt="Emoji Apaixonado">
     
     <div class="question-card">
       <h2>VOCÊ ACEITARIA IR À UM DATE COMIGO?</h2>
@@ -253,14 +255,14 @@ input[type="date"], input[type="time"] {
     </div>
   </div>
 
-  <!-- TELA 2: Confirmação "TEM CERTEZA?" (Aparece logo após clicar em SIM) -->
+  <!-- TELA 2: Confirmação "TEM CERTEZA?" com Emoji Mão na Boca -->
   <div id="step-2" class="screen hidden">
     <div class="top-tag">TEM CERTEZA?</div>
     
-    <img class="custom-emoji-img" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f97a/512.png" alt="Emoji a pedir por favor">
+    <img class="custom-emoji-img" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f92d/512.png" alt="Emoji com a mão na boca">
     
     <div class="question-card">
-      <h2>CERTEZA ABSOLUTA? 🥺</h2>
+      <h2>CERTEZA ABSOLUTA? 🤭</h2>
       <div class="btn-container">
         <button id="btn-sim-2" onclick="goStep(3)">SIM, TENHO!</button>
         <button id="btn-nao-2" onmouseover="fugir(this)" onclick="fugir(this)">NÃO</button>
